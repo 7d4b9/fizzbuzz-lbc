@@ -3,18 +3,20 @@ services:
   fizzbuzz:
     build: .
     ports:
-    - "${FIZZBUZZ_PORT:-8080}:8080"
+    - "${FIZZBUZZ_PORT:-9090}:8080"
     container_name: fizzbuzz
+
   unit-tests:
-    image: ${GOLANG_IMAGE}
+    image: ${GOLANG_IMAGE:-golang:1.12.5-alpine3.9}
     command: go test -mod vendor ./...
     environment:
     - CGO_ENABLED=0
     volumes:
     - ${PWD}:${PWD}
     working_dir: ${PWD}
+
   integration-tests:
-    image: ${GOLANG_IMAGE}
+    image: ${GOLANG_IMAGE:-golang:1.12.5-alpine3.9}
     command: sh -c '
       while ! nc -z fizzbuzz 8080 ; do echo "Waiting fizzbuzz API 1s" ; sleep 1 ; done ;
       go test -tags integration -mod vendor .'

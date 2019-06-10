@@ -1,3 +1,4 @@
+// Package fizzbuzz provides the fizzbuzz controller
 package fizzbuzz
 
 import (

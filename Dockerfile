@@ -1,5 +1,6 @@
 # This file is a template, and might need editing before it works on your project.
-FROM golang:1.12.1-alpine3.9 AS builder
+ARG GOLANG_IMAGE=golang:1.12.1-alpine3.9
+FROM ${GOLANG_IMAGE} AS builder
 
 WORKDIR /build
 WORKDIR /src
